@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  litellm-proxy:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: litellm-proxy
+    volumes:
+      - ./litellm-config.yaml:/app/config.yaml:ro,Z
+    ports:
+      - "127.0.0.1:4000:4000"          # esposto solo su loopback locale
+    command: --config /app/config.yaml --port 4000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  claude-code:
+    build:
+      context: .
+      dockerfile: Containerfile
+    container_name: claude-code
+    depends_on:
+      litellm-proxy:
+        condition: service_healthy
+    environment:
+      - ANTHROPIC_BASE_URL=http://litellm-proxy:4000
+      - ANTHROPIC_API_KEY=sk-local-fake-key
+      - CLAUDE_CODE_DISABLE_TELEMETRY=1
+    volumes:
+      # Monta SOLO la cartella specificata in .env
+      - ${WORKSPACE_PATH}:/workspace:Z
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+    # Impedisce accesso al filesystem host al di fuori del volume
+    security_opt:
+      - no-new-privileges:true
+    read_only: false
+    tmpfs:
+      - /tmp
+      - /root/.npm
+      - /root/.config/claude   # cache di Claude Code

@@ -1,0 +1,15 @@
+model_list:
+  # Claude Code userà questo nome modello — puoi cambiarlo con qualsiasi modello disponibile su Ollama
+  - model_name: claude-3-5-sonnet-20241022
+    litellm_params:
+      model: ollama/qwen2.5-coder:32b   # <-- cambia con il modello che hai su Ollama
+      api_base: http://192.168.0.188:11434
+
+  - model_name: claude-3-haiku-20240307
+    litellm_params:
+      model: ollama/qwen2.5-coder:7b    # modello leggero come fallback
+      api_base: http://192.168.0.188:11434
+
+general_settings:
+  master_key: "sk-local-fake-key"       # chiave fittizia, non esce da localhost
+  drop_params: true                     # ignora parametri non supportati da Ollama
