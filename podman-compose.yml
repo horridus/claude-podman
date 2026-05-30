@@ -14,6 +14,7 @@ services:
       - ${WORKSPACE_PATH}:/workspace:Z
       # Persiste la configurazione di Claude Code tra le sessioni
       - ${CLAUDE_CONFIG_PATH:-~/.claude}:/root/.claude:Z
+      - ${CLAUDE_JSON_PATH:-~/.claude.json}:/root/.claude.json:Z 
     working_dir: /workspace
     stdin_open: true
     tty: true

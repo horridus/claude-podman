@@ -4,6 +4,8 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     procps \
+    iputils-ping \
+    dnsutils \
     && rm -rf /var/lib/apt/lists/*
 
 # Installa Claude Code globalmente
