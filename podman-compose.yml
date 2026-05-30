@@ -34,7 +34,11 @@ services:
     working_dir: /workspace
     stdin_open: true
     tty: true
-    # Impedisce accesso al filesystem host al di fuori del volume
+    # Accesso a internet abilitato tramite rete bridge (default podman-compose)
+    # Il container condivide il DNS dell'host e ha accesso alla rete esterna
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     security_opt:
       - no-new-privileges:true
     read_only: false
