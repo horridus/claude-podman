@@ -12,6 +12,8 @@ services:
     volumes:
       # Monta SOLO la cartella specificata in .env
       - ${WORKSPACE_PATH}:/workspace:Z
+      # Persiste la configurazione di Claude Code tra le sessioni
+      - ${CLAUDE_CONFIG_PATH:-~/.claude}:/root/.claude:Z
     working_dir: /workspace
     stdin_open: true
     tty: true
@@ -26,4 +28,3 @@ services:
     tmpfs:
       - /tmp
       - /root/.npm
-      - /root/.config/claude   # cache di Claude Code
