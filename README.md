@@ -33,7 +33,7 @@ cd claude-podman
 
 # 2. Crea il file .env con il percorso della tua cartella di lavoro
 cp .env.example .env
-nano .env   # imposta WORKSPACE_PATH, OLLAMA_BASE_URL, OLLAMA_MODEL
+nano .env   # imposta WORKSPACE_PATH, OLLAMA_BASE_URL, OLLAMA_MODEL e, opzionalmente, CLAUDE_CONFIG_PATH
 
 # 3. Rendi eseguibile lo script
 chmod +x run.sh
@@ -72,6 +72,16 @@ Modelli consigliati per il coding:
 | `qwen2.5-coder:7b` | ~4GB | Veloce, leggero |
 | `deepseek-coder-v2:16b` | ~9GB | Ottimo compromesso |
 | `codellama:13b` | ~8GB | Classico |
+
+## Persistenza configurazione Claude Code
+
+La configurazione di Claude Code viene montata dall'host nel container su `/root/.claude`, così credenziali, preferenze e cronologia persistono tra una sessione e l'altra.
+
+Per default viene usato `~/.claude` sull'host. Se vuoi usare un percorso diverso, imposta `CLAUDE_CONFIG_PATH` nel file `.env`:
+
+```bash
+CLAUDE_CONFIG_PATH=~/.claude
+```
 
 ## Sicurezza
 
