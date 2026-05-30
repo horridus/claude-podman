@@ -32,7 +32,7 @@ git clone https://github.com/horridus/claude-podman.git
 cd claude-podman
 
 # 2. Crea il file .env con il percorso della tua cartella di lavoro
-cp .env.example .env
+cp env.example .env
 nano .env   # imposta WORKSPACE_PATH, OLLAMA_BASE_URL, OLLAMA_MODEL e, opzionalmente, CLAUDE_CONFIG_PATH
 
 # 3. Rendi eseguibile lo script
