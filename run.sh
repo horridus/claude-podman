@@ -11,7 +11,12 @@ if [[ -n "${1:-}" && -d "$1" ]]; then
   export WORKSPACE_PATH="$(realpath "$1")"
   shift
 fi
-echo "📂 Workspace: $WORKSPACE_PATH"
+
+if [[ -z "${WORKSPACE_PATH:-}" ]]; then
+  echo "❌ Errore: WORKSPACE_PATH non impostato in .env."
+  exit 1
+fi
+echo "📂 Workspace: ${WORKSPACE_PATH}"
 
 # Verifica che la cartella esista
 if [[ ! -d "$WORKSPACE_PATH" ]]; then
