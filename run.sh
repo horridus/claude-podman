@@ -13,7 +13,7 @@ if [[ -n "${1:-}" && -d "$1" ]]; then
 fi
 
 if [[ -z "${WORKSPACE_PATH:-}" ]]; then
-  echo "❌ Errore: WORKSPACE_PATH non impostato in .env."
+  echo "❌ Errore: WORKSPACE_PATH non impostata in .env."
   exit 1
 fi
 echo "📂 Workspace: ${WORKSPACE_PATH}"
@@ -34,7 +34,7 @@ if [[ "$#" -gt 0 ]]; then
   podman-compose run --rm claude-code "$@"
 else
   if [[ -z "${OLLAMA_MODEL:-}" ]]; then
-    echo "❌ Errore: OLLAMA_MODEL non impostato in .env."
+    echo "❌ Errore: OLLAMA_MODEL non impostata in .env."
     exit 1
   fi
   podman-compose run --rm claude-code --model "${OLLAMA_MODEL}"
